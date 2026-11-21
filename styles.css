@@ -1,0 +1,399 @@
+/* ===== Colors I use on the whole site (CSS variables) ===== */
+:root {
+    --deep-sea: #0b4f6c;
+    --sea: #1f8fbf;
+    --turquoise: #5fd3e8;
+    --sand: #fff8ef;
+    --coral: #ff7f50;
+    --text: #23395b;
+}
+
+/* ===== General ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--sand);
+    color: var(--text);
+    text-align: center;
+}
+
+h2 {
+    color: var(--deep-sea);
+    font-size: 2rem;
+}
+
+h3 {
+    color: var(--sea);
+}
+
+p {
+    line-height: 1.7;
+}
+
+/* ===== Top section with the sea ===== */
+.top-container {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #bfe9ff, #e8f7ff);
+    overflow: hidden;
+}
+
+.top-container h1 {
+    font-size: 4rem;
+    color: var(--deep-sea);
+    margin: 0;
+}
+
+.top-container h2 {
+    font-weight: 300;
+    color: var(--sea);
+    margin-top: 10px;
+}
+
+.ocean {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat-x;
+    background-size: 50% 100%;
+    animation: waves 10s linear infinite;
+}
+
+.wave1 {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z' fill='%235fd3e8'/></svg>");
+    opacity: 0.6;
+    animation-duration: 12s;
+}
+
+.wave2 {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z' fill='%231f8fbf'/></svg>");
+    height: 80%;
+    opacity: 0.7;
+    animation-duration: 8s;
+    animation-direction: reverse;
+}
+
+.wave3 {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'><path d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z' fill='%23fff8ef'/></svg>");
+    height: 50%;
+    animation-duration: 6s;
+}
+
+/* the animation: moves the waves to the side forever */
+@keyframes waves {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ===== Sections ===== */
+.section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* the dotted line between sections (like in the example site) */
+hr {
+    border: dotted var(--turquoise) 6px;
+    border-bottom: none;
+    width: 4%;
+    margin: 80px auto;
+}
+
+/* ===== Cards (What I Do) with Grid ===== */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card,
+.project-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(11, 79, 108, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* when the mouse is over a card, it goes up a little */
+.card:hover,
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 24px rgba(11, 79, 108, 0.2);
+}
+
+/* ===== Projects: vertical timeline ===== */
+.projects-grid {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* the line in the middle */
+.projects-grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    margin-left: -2px;
+    background-color: var(--turquoise);
+    border-radius: 4px;
+}
+
+.project-card {
+    position: relative;
+    width: calc(50% - 60px);
+}
+
+/* odd projects on the left side of the line */
+.project-card:nth-child(odd) {
+    align-self: flex-start;
+    text-align: right;
+}
+
+/* even projects on the right side of the line */
+.project-card:nth-child(even) {
+    align-self: flex-end;
+    text-align: left;
+}
+
+/* the round picture sits on the line */
+.project-card img {
+    position: absolute;
+    top: 50%;
+    width: 110px;
+    height: 110px;
+    margin-top: -55px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 0 0 4px var(--turquoise);
+    transition: transform 0.3s;
+}
+
+.project-card:nth-child(odd) img {
+    right: -115px;
+}
+
+.project-card:nth-child(even) img {
+    left: -115px;
+}
+
+.project-card:hover img {
+    transform: scale(1.15);
+}
+
+.project-card h3 {
+    margin-top: 0;
+}
+
+.project-card p {
+    margin-bottom: 0;
+}
+
+/* ===== Hobbies: zigzag rows with round pictures ===== */
+.hobbies-container {
+    max-width: 750px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+/* every hobby is a small grid: picture on one side, text on the other */
+.hobby {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    column-gap: 40px;
+    align-items: center;
+    text-align: left;
+}
+
+.hobby img {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid white;
+    box-shadow: 0 0 0 4px var(--turquoise);
+    transition: transform 0.4s;
+}
+
+.hobby img:hover {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+.hobby h3 {
+    margin: 0;
+    align-self: end;
+}
+
+.hobby p {
+    margin: 8px 0 0;
+    align-self: start;
+}
+
+/* every second hobby: picture on the right, text on the left */
+.hobby:nth-child(even) {
+    grid-template-columns: 1fr 170px;
+    text-align: right;
+}
+
+.hobby:nth-child(even) img {
+    grid-column: 2;
+}
+
+.hobby:nth-child(even) h3,
+.hobby:nth-child(even) p {
+    grid-column: 1;
+}
+
+/* ===== Fun facts ===== */
+.facts-list {
+    list-style: none;
+    padding: 0;
+}
+
+.facts-list li {
+    background-color: white;
+    border-right: 5px solid var(--coral);
+    border-radius: 8px;
+    margin: 12px auto;
+    padding: 12px 16px;
+    max-width: 600px;
+}
+
+/* ===== Contact button ===== */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 36px;
+    background-color: var(--coral);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--deep-sea);
+    transform: scale(1.05);
+}
+
+/* ===== Footer with Flexbox ===== */
+footer {
+    margin-top: 80px;
+    padding: 30px;
+    background-color: var(--deep-sea);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-link {
+    color: var(--turquoise);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: white;
+}
+
+/* ===== Responsive: tablet ===== */
+@media (max-width: 900px) {
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== Responsive: mobile ===== */
+@media (max-width: 600px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* on a phone: the timeline line moves to the left side */
+    .projects-grid::before {
+        left: 35px;
+    }
+
+    .project-card,
+    .project-card:nth-child(odd),
+    .project-card:nth-child(even) {
+        width: auto;
+        align-self: stretch;
+        margin-left: 80px;
+        text-align: left;
+    }
+
+    .project-card img,
+    .project-card:nth-child(odd) img,
+    .project-card:nth-child(even) img {
+        width: 60px;
+        height: 60px;
+        margin-top: -30px;
+        right: auto;
+        left: -75px;
+    }
+
+    /* on a phone: picture above the text, everything centered */
+    .hobby,
+    .hobby:nth-child(even) {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hobby img,
+    .hobby:nth-child(even) img {
+        grid-column: 1;
+        grid-row: auto;
+        margin: 0 auto 16px;
+    }
+
+    .hobby:nth-child(even) h3,
+    .hobby:nth-child(even) p {
+        grid-column: 1;
+    }
+
+    .top-container h1 {
+        font-size: 2.5rem;
+    }
+
+    hr {
+        width: 15%;
+    }
+}
